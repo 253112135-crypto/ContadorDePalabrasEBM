@@ -2,23 +2,34 @@ import sys
 from PyQt5 import QtWidgets, uic
 
 class ContadorPalabras(QtWidgets.QMainWindow):
+    
     def __init__(self):
         super().__init__()
-        #Carga de nuestra vista
-        uic.loadUi("ContadorPalabras.ui", self)
-        self.btnContar.clicked.connect(self.contadorPalabras)
-    
+        #CARGA DE NUESTRA VISTA
+        uic.loadUi("ContadorPalabras.ui",self)
+        self.btnContar.clicked.connect(self.ContarPalabras)
+        
     def ContarPalabras(self):
-        #Recuperar el texto✅
+        
+        #Recuperar texto (check)
         texto = self.edtCaracteres.text()
-        #Separar las plabras✅
-        palabras = texto.split()
-        #Contar las palbras✅
-        cantidadPalabras = len(palabras)
-        #Contar los caracteres
-        print("Se  ha presionado el botón...")
-
+        
+        #Separar palabras (check)
+        textoSeparado = texto.split()
+        print(textoSeparado)
+        
+        #Contar palabras
+        cantidadPalabras = len(textoSeparado)
+        self.tvPalabras.setText(f"Palabras: {cantidadPalabras}")
+        
+        #Contar caracteres
+        totalCaracteres = 0
+        for palabra in textoSeparado:
+            totalCaracteres += len(palabra)
+        totalCaracteres
+        self.tvCaracteres.setText(f"Caracteres: {totalCaracteres}")
+        
 app = QtWidgets.QApplication(sys.argv)
 ventana = ContadorPalabras()
 ventana.show()
-sys.exit(app.exec_())
+sys.exit(app.exec())
